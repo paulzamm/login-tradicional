@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../Services/user.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,12 @@ export class LoginComponent {
     this.userService
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .then((response) => {
-        console.log(response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Bienvenido',
+          showConfirmButton: false,
+          timer: 1050,
+        })
         this.router.navigate(['/home']);
       })
       .catch((error) => {
